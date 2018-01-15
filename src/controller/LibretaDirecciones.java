@@ -10,11 +10,14 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.VistaPersonaController;
 
 /**
  *
@@ -22,6 +25,7 @@ import javafx.stage.Stage;
  */
 public class LibretaDirecciones extends Application{
     
+    private ObservableList datosPersona = FXCollections.observableArrayList();
     private Stage escenarioPrincipal;
     private BorderPane layoutPrincipal;
     private AnchorPane vistaPersona;
@@ -41,6 +45,11 @@ public class LibretaDirecciones extends Application{
     
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    //Método para devolver los datos como lista observable de personas
+    public ObservableList getDatosPersona() {
+        return datosPersona;
     }
     
     private void initLayoutPrincipal(){
@@ -73,6 +82,10 @@ public class LibretaDirecciones extends Application{
             e.printStackTrace();
         }
         layoutPrincipal.setCenter(vistaPersona);
+        
+        //Doy acceso al controlador VistaPersonaCOntroller a LibretaDirecciones
+        VistaPersonaController controller = loader.getController();
+        controller.setLibretaDirecciones(this);
         
     }
     
